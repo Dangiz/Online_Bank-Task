@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="~{header.html::navbar}"></div>
+<main  role="main" class="container" style="text-align: center">
+            <h1 class="cover-heading">Home_Page</h1>
+            <p class="lead">This is a home page of Online_Bank application</p>
+    <div sec:authorize="!isFullyAuthenticated()">
+        <div th:insert="~{log.html::loginForm}"></div>
+    </div>
+</main>
+</div>
+</body>
+</html>

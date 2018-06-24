@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+<div th:insert="~{header.html::navbar}"></div>
+<div class="jumbotron  text-center">
+    <form action="#" th:action="@{/profile/new_cache}" th:object="${newCache}" method="post" >
+        <div class="form-group">
+            <input type="text" th:field="*{name}"  class="form-control" placeholder="Cache Name">
+        </div>
+        <input class="btn btn-light" type="submit" value="Craete">
+    </form>
+</div>
+</body>
+</html>

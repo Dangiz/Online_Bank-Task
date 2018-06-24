@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+<header>
+<div th:insert="~{header.html::navbar}"></div>
+</header>
+<main>
+    <section class="jumbotron  text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-6" >
+                    <div class="userinfo card">
+                        <div class="card-body">
+
+                            <h5 class="card-title">Information about <span th:text="${user.userName}"></span>:</h5>
+                            <ul>
+                                <li><p>ID:  <span class="card-text" th:text="${user.id}"></span></p></li>
+                                <li><p>First Name:  <span class="card-text" th:text="${user.firstName}"></span></p></li>
+                                <li><p>Last Name:   <span class="card-text" th:text="${user.lastName}"></span></p></li>
+                                <li><p>Birth Date:  <span class="card-text" th:text="${user.birthDate}"></span></p></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="usercaches  card">
+                        <div class="card-body">
+                            <h5 class="card-title"> User Caches:</h5>
+                        </div>
+                        <table class="table table-striped ">
+                            <thead class="thead-dark">
+                            <th scope="col">Cache name</th>
+                            <th scope="col">Cache number</th>
+                            <th scope="col">Sum</th>
+                            </thead>
+                            <tr th:each="cache:${caches}">
+                                <td>
+                                    <a sec:authorize="hasRole('ADMIN')" th:href="@{/users/details/{userId}/cache_info(cacheId=${cache.id},userId=${user.id})}" th:text="${cache.name}"/>
+                                    <a sec:authorize="hasRole('USER')" th:href="@{/profile/cache_info(cacheId=${cache.id})}" th:text="${cache.name}"/>
+                                </td>
+                                <td th:utext="${cache.id}">
+                                <td th:utext="${cache.sum}">
+                            </tr>
+                        </table>
+                        <a class="btn btn-secondary" sec:authorize="hasRole('USER')" th:href="@{/profile/new_cache}">Add Cache</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

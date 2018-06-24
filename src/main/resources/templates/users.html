@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Title</title>
+    <link rel="import" href="home.html">
+
+</head>
+<body>
+<div th:insert="~{header.html::navbar}"></div>
+<div class="container-flud">
+    <table class="table table-striped ">
+        <thead class="thead-dark">
+            <th scope="col">Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th sec:authorize="hasRole('ADMIN')">Controls</th>
+        </thead>
+        <tr th:each="user:${users}">
+            <td th:utext="${user.id}">
+            <td th:utext="${user.userName}">
+            <td th:utext="${user.firstName}">
+            <td th:utext="${user.lastName}">
+            <td sec:authorize="hasRole('ADMIN')">
+                            <form th:action="@{/users/doDelete(userId=${user.id})}" method="post">
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-dark" th:href="@{/users/details(userId=${user.id})}">Details</a>
+                                    <input class="btn btn-dark" type="submit" value="Delete" />
+                                </div>
+                            </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
